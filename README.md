@@ -41,5 +41,4 @@ Aplikasi **Web Absensi Guru** ini dibangun menggunakan **Laravel 11** dan berfun
 
 1. **Clone Repository**  
    ```bash
-   git clone https://github.com/username/web-absensi-guru.git
-   cd web-absensi-guru
+   https://github.com/ristof5/location-absence.git
