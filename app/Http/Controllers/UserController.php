@@ -55,14 +55,25 @@ class UserController extends Controller
         $attendance = Attendance::where('user_id', $user_id)->whereDate('created_at', $today)->first();
 
         if (!$attendance) {
+
+            // Cek keterlambatan
+            $waktu_sekarang = now();
+            $batas_waktu = now()->setTime(8, 0, 0); // 08:00:00
+
+            $status = 'Absen Masuk Berhasil';
+            if ($waktu_sekarang->gt($batas_waktu)) {
+            $status = 'Terlambat absen masuk (setelah pukul 08:00)';
+            }
+
             $attendance = new Attendance();
             $attendance->user_id = $user_id;
             $attendance->location_id = $location->id; // Perbaiki bagian ini
             $attendance->check_in_lat = $request->latitude;
             $attendance->check_in_long = $request->longitude;
             $attendance->check_in_time = now();
+            $attendance->status = ($waktu_sekarang->gt($batas_waktu)) ? 'Terlambat' : 'Tepat Waktu';
             $attendance->save();
-            return back()->with('status', 'Absen Masuk Berhasil');
+            return back()->with('status', $status);
         } else {
             if (!$attendance->check_out_time) {
                 $attendance->check_out_lat = $request->latitude;
