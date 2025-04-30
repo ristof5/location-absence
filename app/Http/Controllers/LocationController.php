@@ -34,7 +34,7 @@ class LocationController extends Controller
             'address' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
-            'radius' => 'required',
+            'radius' => 'required|numeric|min:10', // Misal minimal 10 meter
             'is_active' => 'required',
         ]);
         Location::create($validate);
@@ -63,10 +63,10 @@ class LocationController extends Controller
         $validate = $request->validate([
             'name_location' => 'required',
             'address' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'radius' => 'required',
-            'is_active' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'radius' => 'required|numeric|min:10', // Misal minimal 10 meter
+            'is_active' => 'required|boolean',
         ]);
         $loc = Location::find($id);
         $loc->update($validate);
