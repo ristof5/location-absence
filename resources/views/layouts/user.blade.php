@@ -14,8 +14,8 @@
     <div class="card rounded-bottom-5 rounded-top-0" style="background: #008080">
         <div class="card-body">
             @if (Session::has('status'))
-                <div class="container">
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="container mt-2">
+                    <div class="alert alert-info alert-dismissible fade show shadow-sm text-center" role="alert">
                         {{ Session::get('status') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
